@@ -1,113 +1,633 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brian Zhu - An Explorer</title>
-  <meta name="description" content="Brian Zhu is an explorer, software engineer, and student pursuing a Master's degree in Electrical and Computer Engineering at the University of Victoria. Specializing in cybersecurity and machine learning, with over seven years of software engineering experience.">
-  <meta name="keywords" content="Brian Zhu, software engineer, cybersecurity, machine learning, frontend architect, cloud-based software, data visualization, UVic, University of Victoria, Mistong, Schoolpal">
-  <meta name="author" content="Brian Zhu">
-  <meta name="robots" content="index, follow">
-  <style>
-    :root {
-      --background-light: #ffffff;
-      --text-light: #000000;
-      --background-dark: #121212;
-      --text-dark: #ffffff;
-      --button-background-light: #f0f0f0;
-      --button-background-dark: #333333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brian Zhu | Portfolio</title>
+    <meta name="description" content="Brian Zhu – Vancouver-based Machine Learning Engineer and Software Developer. 7+ years experience in scalable systems, semantic search, front-end architecture, and cloud-native platforms.">
+    <meta name="keywords" content="Brian Zhu, software engineer, machine learning, system architect, cloud-based software, data visualization, UVic, University of Victoria, Mistong, Xiaobao">
+    <meta name="author" content="Brian Zhu">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="https://img.dogrod.ca/logo.ico">
+    <style>
+        :root {
+            /* Updated modern, minimalist color palette */
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #3498db;
+            --accent-light: #d6eaf8;
+            --background-color: #f9f9f9;
+            --card-background: #ffffff;
+            --timeline-line: #e0e0e0;
+            --timeline-dot: #3498db;
+            --highlight-bg: #eaf2f8;
+            --highlight-underline: #b3d8ff;
+            --text-light: #95a5a6;
+            --border-color: #ecf0f1;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color);
+            background-color: var(--background-color);
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .bio {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.8;
+        }
+        
+        .bio p {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      transition: background-color 0.5s, color 0.5s;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        .summary {
+            /* margin: 4rem 0; */
+            /* background-color: var(--highlight-bg); */
+            padding: 0  2rem 1rem;
+            border-radius: 8px;
+            /* box-shadow: 0 2px 5px rgba(0,0,0,0.05); */
+        }
 
-    .light-theme {
-      background-color: var(--background-light);
-      color: var(--text-light);
-    }
+        .summary h2 {
+            font-size: 1.6rem;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+        }
 
-    .dark-theme {
-      background-color: var(--background-dark);
-      color: var(--text-dark);
-    }
+        .summary h2::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-      flex: 1;
-    }
+        .summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 1.8;
+            color: var(--primary-color);
+        }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
-    }
+        .summary ul li {
+            padding-left: 1.2rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
-    }
+        .summary ul li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-    }
+        @media (max-width: 600px) {
+            .summary {
+                padding: 1.5rem 1rem;
+            }
+        }
+        
+        .highlight {
+            background-color: var(--highlight-bg);
+            padding: 3px 6px;
+            border-radius: 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            border-bottom: 2px solid var(--highlight-underline);
+            display: inline;
+        }
 
-    a:hover {
-      opacity: 0.7;
-    }
+        .bold {
+            font-weight: 600;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
 
-    .footer {
-      text-align: center;
-      padding: 20px;
-    }
+        /* Timeline styles */
+        .timeline-container {
+            margin: 4rem auto;
+            position: relative;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--timeline-line);
+            top: 25px;
+            bottom: 25px;
+            left: 31px;
+        }
+        
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+            position: relative;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: var(--timeline-dot);
+            border-radius: 50%;
+            top: 25px;
+            left: 23px;
+            z-index: 1;
+        }
+        
+        .left, .right {
+            left: 0;
+            text-align: left;
+        }
+        
+        .timeline-content {
+            padding: 1.2rem;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .timeline-content:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.15rem;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .timeline-company {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
 
-    .button {
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 1em;
-      border-bottom: 1px solid;
-      padding-bottom: 2px;
-    }
+        .timeline-company a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
 
-    .button:hover {
-      opacity: 0.8;
-    }
-  </style>
+        .timeline-company a:hover {
+            border-bottom: 1px solid var(--secondary-color);
+        }
+        
+        .timeline-desc {
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary-color);
+            line-height: 1.7;
+        }
+        
+        /* Project styles */
+        .projects-container {
+            border-top: 1px solid var(--border-color);
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            display: none;
+            background-color: rgba(240, 242, 245, 0.4);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+        
+        .projects-container.show {
+            display: block;
+        }
+        
+        .project-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .project-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .project-title {
+            font-size: 1rem;
+            margin: 0.4rem 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .project-date {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .project-desc {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+        
+        .toggle-projects {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 500;
+            border: none;
+            background: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-color);
+            transition: all 0.2s ease;
+        }
+        
+        .toggle-projects:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-category-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-left: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .skill-category-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+        
+        .skill-category p {
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-links a {
+            border-bottom: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-projects');
+            
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectsContainer = this.nextElementSibling;
+                    
+                    if (projectsContainer.classList.contains('show')) {
+                        projectsContainer.classList.remove('show');
+                        this.textContent = 'Show Projects';
+                    } else {
+                        projectsContainer.classList.add('show');
+                        this.textContent = 'Hide Projects';
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-  <div class="container">
-    <h1>Hi 👋 I'm Brian</h1>
-    <p>An explorer 🥷, software engineer ⌨️, and student 🧑‍🎓</p>
-    <p>I'm currently pursuing a Master's degree in Electrical and Computer Engineering at the <a target="_blank" href="https://www.uvic.ca/">University of Victoria</a>, specializing in cybersecurity and machine learning under the guidance of <a target="_blank" href="https://www.uvic.ca/ecs/software/research/our-researchers/traoreissa.php">Dr. Issa Traore</a>.</p>
-    <p>Before joining UVic, I amassed over seven years of software engineering experience, beginning in 2016. I served as the team lead for the R&D infrastructure team and as the frontend architect at <a target="_blank" href="https://www.mistong.com/">Hangzhou Mistong Digital Technology Co. Ltd.</a>, one of the largest online education platforms in China. My work at Mistong focused on cloud-based software architecture and data visualization.</p>
-    <p>Prior to my role at Mistong, I was the lead frontend engineer at <a target="_blank" href="https://www.xiaobaoonline.com/">Schoolpal Online Hangzhou Technology Co. Ltd.</a>, China's largest educational training service provider. There, I led the infrastructure design for core businesses and optimized the main site, payment system, and other services.</p>
-    <p>I am currently seeking Co-op opportunities starting in September 2024, located in Victoria, the Greater Vancouver Area, or fully remote. I am looking for positions as a Software Development Engineer (SDE), Data Scientist, or Machine Learning Engineer. <br/>Feel free to contact me at 👉 brian dot zhu77 at gmail dot com.</p>
-  </div>
-  <div class="footer">
-    <a target="_blank" href="https://github.com/dogrod" class="button">GitHub</a>
-    <a target="_blank" href="https://www.linkedin.com/in/brianzhu7/" class="button">LinkedIn</a>
-    <a target="_blank" href="https://unsplash.com/@dogrod" class="button">Unsplash</a>
-  </div>
-  <script>
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.body.classList.toggle('dark-theme', userPrefersDark);
-    document.body.classList.toggle('light-theme', !userPrefersDark);
+    <div class="container">
+        <header>
+            <h1>Hi 👋 I'm Brian</h1>
+            <div class="tagline">An explorer 🥷 , machine learning engineer 🤖 , and coder ⌨️</div>
+        </header>
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-      const isDark = event.matches;
-      document.body.classList.toggle('dark-theme', isDark);
-      document.body.classList.toggle('light-theme', !isDark);
-    });
-  </script>
+        <section class="summary">
+            <h2 class="section-title">Quick Facts</h2>
+            <ul>
+                <li><span class="bold">7+ years</span> in software development across ML, infra, and software architecture</li>
+                <li>Shipped ML-powered search systems for <span class="bold">10M+ users</span></li>
+                <li>Hands-on experience with <span class="bold">PyTorch, Kubernetes, Elasticsearch, React,</span> and more</li>
+                <li>Recently completed MEng in ECE at <a href="https://uvic.ca" target="_blank">University of Victoria</a></li>
+                <li>Actively seeking <span class="bold">MLE/SDE roles</span> in Metro Vancouver</li>
+                <li>Welcome connections and conversations on <a href="https://www.linkedin.com/in/brianzhu7/" target="_blank">LinkedIn</a>.</li>
+            </ul>
+        </section>
+
+        <h2 class="section-title">Professional Journey</h2>
+        
+        <div class="timeline-container">
+            <div class="timeline">
+                <!-- Education -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2024 - Dec 2024</div>
+                        <h3 class="timeline-title">MEng, Electrical and Computer Engineering</h3>
+                        <div class="timeline-company"><a href="https://www.uvic.ca/" target="_blank">University of Victoria</a></div>
+                        <p class="timeline-desc">
+                            <ul>
+                                <li>Served as Teaching Assistant for ECE499 (Design Project II), mentoring 10+ capstone teams on technical direction, progress tracking, and final deliverables.</li>
+                                <li>Conducted research under <a href="https://www.ece.uvic.ca/~itraore/" target="_blank">Dr. Issa Traoré</a>, contributing to an embedded machine learning–based drone anomaly detection system. <a href="https://hdl.handle.net/1828/21025" target="_blank">View Project Paper</a></li>
+                                <li>Processed 11.5M network samples and 1.25M MAVLink messages for model training, leveraging Python for data engineering workflows.</li>
+                                <li>Supported the deployment of an on-device detection pipeline on Raspberry Pi 4B, achieving 99% accuracy on network threats and 95% on sensor faults with real-time performance constraints.</li>
+                            </ul>
+                        </p>
+
+                        <button class="toggle-projects">Show Projects</button>
+                        <div class="projects-container">
+                            <div class="project-item">
+                                <div class="project-date">Jul 2024 – Jan 2025</div>
+                                <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
+                                <p class="project-desc">
+                                    <ul>
+                                        <li>Implemented a real-time anomaly detection system using Isolation Forest algorithm on Raspberry Pi 4B, achieving 99% accuracy for network attacks and 95% for sensor anomalies.</li>
+                                        <li>Collected and analyzed 11.5M network traffic samples and 1.25M MAVLink messages using Python for training data.</li>
+                                        <li>Developed detection mechanisms for network attacks, GPS spoofing, and rangefinder anomalies through MAVLink protocol integration.</li>
+                                        <li>Optimized detection pipeline with a sliding window approach, processing network and sensor data streams in real-time</li>
+                                        <li>Integrated system with Pixhawk 6C flight controller and ESP8266 Wi-Fi module for comprehensive drone security monitoring</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mistong -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2022 - Dec 2023</div>
+                        <h3 class="timeline-title">Infra Team Lead, Architect</h3>
+                        <div class="timeline-company"><a href="https://www.mistong.com/" target="_blank">Hangzhou Mistong Digital Technology Co. Ltd.</a></div>
+                        <p class="timeline-desc">
+                            <ul>
+                                <li>Led a 15-member infrastructure team to build an R&D Infrastructure Platform supporting DevOps, SSO, and advanced traffic management.</li>
+                                <li>Architected and developed a transformer-based personalized search system using PyTorch, boosting CTR by 25%.</li>
+                                <li>Led performance optimization that processed thousands of images per second with response times under 50 ms.</li>
+                                <li>Directed the front-end architecture strategy, introducing micro-frontends and a shared component library.</li>
+                                <li>Published a technical case study in collaboration with Alibaba Cloud, highlighting serverless implementation best practices and system scalability. <a href="https://www.alibabacloud.com/blog/600160" target="_blank">View</a></li>
+                            </ul>
+                        </p>
+                        
+                        <button class="toggle-projects">Show Projects</button>
+                        <div class="projects-container">
+                            <div class="project-item">
+                                <div class="project-date">Jul 2022 - Sep 2023</div>
+                                <h4 class="project-title">EWT360 Search Platform</h4>
+                                <p class="project-desc">
+                                    <ul>
+                                        <li>Designed and developed a personalized search system for a Coursera-like platform with 10M+ users and 100K+ courses, boosting clickthrough rate by 25% and increasing course engagement depth by 10%.</li>
+                                        <li>Implemented a semantic search pipeline using a BERT-based two-tower model, reducing search abandonment by 30%.</li>
+                                        <li>Developed a hybrid retrieval strategy by integrating Elasticsearch with Redis-based vector search to enhance relevance and performance.</li>
+                                        <li>Engineered a scalable embedding generation pipeline for user profiles and course content, efficiently processing over 1 PB of interaction data.</li>
+                                    </ul>
+                                </p>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-date">Jan 2022 - Dec 2023</div>
+                                <h4 class="project-title">Mistong R&D Infrastructure Platform</h4>
+                                <p class="project-desc">
+                                    <ul>
+                                        <li>Architected a Microsoft Azure-like infrastructure platform serving 300+ applications with 50K+ QPS peak traffic using Kubernetes, APISIX, and Alibaba Cloud.</li>
+                                        <li>Developed a high-performance rendering service with dynamic routing and pre-rendering features.</li>
+                                        <li>Migrated 100+ frontend apps, 200+ Java services, and 1 PB+ of data to Alibaba Cloud with zero downtime.</li>
+                                        <li>Built a traffic governance system supporting grayscale releases across 100+ applications using APISIX and Zuul.</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Xiaobao -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Dec 2018 - Jan 2022</div>
+                        <h3 class="timeline-title">Front-end Team Lead</h3>
+                        <div class="timeline-company"><a href="https://www.xiaobaoonline.com/" target="_blank">Xiaobao Online (Hangzhou) Technology Co., Ltd.</a></div>
+                        <p class="timeline-desc">
+                            <ul>
+                                <li>Led a 35-member front-end team, overseeing recruitment, performance management, and professional development.</li>
+                                <li>Designed and implemented a micro-frontend architecture with Node.js BFF layer supporting 50+ applications.</li>
+                                <li>Built developer platforms including DevOps, configuration management, and SSO increasing team efficiency by 40%.</li>
+                                <li>Established standardized Git workflow and coding standards, reducing deployment issues by 60%.</li>
+                                <li>Developed a mobile application service platform using React Native and TypeScript, enhancing mobile service delivery.</li>
+                            </ul>
+                        </p>
+                        
+                        <button class="toggle-projects">Show Projects</button>
+                        <div class="projects-container">
+                            <div class="project-item">
+                                <div class="project-date">Sep 2020 - Jan 2022</div>
+                                <h4 class="project-title">SchoolPal 11 Training Institution Management System</h4>
+                                <p class="project-desc">
+                                    <ul>
+                                        <li>Responsible for the overall architecture design of the Schoolpal app and the design and development of supporting tools for mobile web applications.</li>
+                                        <li>Implemented features such as message push notifications, business data collection, and application monitoring for the Schoolpal app by writing code in Objective-C, Swift, and Java to achieve native functionality.</li>
+                                        <li>Technical Stack: React Native, Vue.js, TypeScript, Less.js, webpack, Vite</li>
+                                    </ul>
+                                </p>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-date">Dec 2018 - Aug 2021</div>
+                                <h4 class="project-title">Schoolpal Cloud Pay</h4>
+                                <p class="project-desc">
+                                    <ul>
+                                        <li>Led the front-end reconstruction of the Schoolpal cashier interface, reducing the time to first interactive screen from 2.4 seconds to 0.6 seconds, decreasing average user wait time by over 70%, and optimizing user operation processes to significantly enhance the user experience.</li>
+                                        <li>Spearheaded the optimization of the first screen rendering time for the B2B mobile cashier interface, reducing the average rendering time from 2 seconds to 1.2 seconds.</li>
+                                        <li>Technical Stack: Vue.js, TypeScript, Less.js, webpack</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Xkeshi-->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Mar 2017 – Dec 2018</div>
+                        <h3 class="timeline-title">Senior Front-end Engineer</h3>
+                        <div class="timeline-company">Zhejiang Xkeshi Network Technology Co., Ltd.</div>
+                        <p class="timeline-desc">
+                            <ul>
+                                <li>Reconstructed mobile app pages from Vue.js to React with TypeScript, improving maintainability by 35%.</li>
+                                <li>Developed an advertising platform interface handling 200K+ daily transactions and ensuring seamless performance.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Zhuliyan -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jul 2016 – Mar 2017</div>
+                        <h3 class="timeline-title">Front-end Developer</h3>
+                        <div class="timeline-company"><a href="http://www.juliet.vip/" target="_blank">Hangzhou Zhuliyan Network Co., Ltd.</a></div>
+                        <p class="timeline-desc">
+                            <ul>
+                                <li>Developed an order management system using Vue.js processing 50K+ daily orders and supporting scalable operations.</li>
+                                <li>Built a responsive POS retail system with jQuery and Bootstrap supporting 1K+ merchants across various devices.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Programming</h3>
+                    <p>Python (PyTorch), TypeScript (React.js, Node.js), JavaScript, Java</p>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Machine Learning</h3>
+                    <p>Search/Recommendation Systems, Natural Language Processing (Transformer, BERT), Anomaly Detection (Isolation Forest), Prompt Engineering, Agentic Workflow</p>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Infrastructure</h3>
+                    <p>Kubernetes, Docker, Serverless, Kafka, Microservices, CI/CD, DevOps Platforms, Nginx</p>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Cloud Platforms</h3>
+                    <p>Alibaba Cloud (extensive migration & operational experience), AWS, Azure</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="social-links">
+            <a href="https://github.com/dogrod" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/brianzhu7/" target="_blank">LinkedIn</a>
+            <a href="https://unsplash.com/@dogrod" target="_blank">Unsplash</a>
+            <a href="https://x.com/dogrod_" target="_blank">X (formerly Twitter)</a>
+        </div>
+    </div>
 </body>
 </html>
