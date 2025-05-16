@@ -385,6 +385,7 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 3rem;
+            flex-wrap: wrap;
         }
         
         .social-links a {
@@ -399,6 +400,21 @@
         .social-links a:hover {
             color: var(--accent-color);
             transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .timeline::after {
+                display: none;
+            }
+            
+            .timeline-item::after {
+                display: none;
+            }
         }
     </style>
     <script>
