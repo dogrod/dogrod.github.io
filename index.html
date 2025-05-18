@@ -111,6 +111,8 @@
             color: var(--accent-color);
             position: absolute;
             left: 0;
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 1.1rem;
             line-height: 1;
         }
@@ -173,8 +175,10 @@
             transition: all 0.2s ease;
         }
         
-        .timeline-content:hover {
-            background-color: var(--hover-color);
+        @media (hover: hover) {
+            .timeline-content:hover {
+                background-color: var(--hover-color);
+            }
         }
         
         .timeline-date {
@@ -273,8 +277,10 @@
             transition: all 0.2s ease;
         }
         
-        .toggle-projects:hover {
-            background-color: var(--hover-color);
+        @media (hover: hover) {
+            .toggle-projects:hover {
+                background-color: var(--hover-color);
+            }
         }
         
         /* Skills section */
