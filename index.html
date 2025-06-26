@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian Zhu | Tech Lead and Machine Learning Engineer in Vancouver</title>
-    <meta name="description" content="Brian Zhu – Vancouver-based Tech Lead, Machine Learning Engineer and Software Developer. 7+ years experience in scalable systems, semantic search, front-end architecture, and cloud-native platforms.">
-    <meta name="keywords" content="Brian Zhu, tech lead, engineering manager, software engineer, machine learning, system architect, cloud-based software, data visualization, UVic, University of Victoria, Mistong, Xiaobao">
+    <title>Brian Zhu | Senior Software Engineer & System Architect in Vancouver</title>
+    <meta name="description" content="Brian Zhu – Senior Software Engineer and System Architect based in Vancouver with 7+ years experience in cloud-native platforms, high-scale infrastructure, search systems, and frontend/backend architecture.">
+    <meta name="keywords" content="Brian Zhu, software engineer, system architect, SDE, cloud-native, scalable systems, Vancouver tech, React, Kubernetes, Elasticsearch, Go, TypeScript, frontend architect, backend infrastructure, UVic, Mistong, Xiaobao">
     <meta name="author" content="Brian Zhu">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Brian Zhu | Machine Learning Engineer Portfolio">
-    <meta property="og:description" content="Explore Brian Zhu's experience in ML, recommendation systems, infrastructure, and front-end architecture.">
+    
+    <meta property="og:title" content="Brian Zhu | Senior Software Engineer Portfolio">
+    <meta property="og:description" content="Explore Brian Zhu's portfolio in infrastructure, scalable system design, frontend architecture, and cloud software engineering.">
     <meta property="og:url" content="https://dogrod.com">
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content="https://dogrod.com/assets/og-image.jpg"> -->
-
+    
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Brian Zhu | Machine Learning Engineer">
-    <meta name="twitter:description" content="Vancouver-based ML Engineer with 7+ years experience in scalable systems and search.">
+    <meta name="twitter:title" content="Brian Zhu | Senior Software Engineer & System Architect">
+    <meta name="twitter:description" content="Vancouver-based Software Engineer with 7+ years building cloud-native systems, high-traffic platforms, and internal tools.">    
     <!-- <meta name="twitter:image" content="https://dogrod.com/assets/og-image.jpg"> -->
     <meta name="google-site-verification" content="dn6MXUkpLdyOEMMlEkNl2bQ3bPMt2nxmv_6PG1Ssvvo" />
     <link rel="canonical" href="https://dogrod.com/">
@@ -33,325 +33,684 @@
     <script src="https://openpanel.dev/op1.js" defer async></script>
     <style>
         :root {
-            /* Notion-inspired color palette */
-            --primary-color: #37352f;
-            --secondary-color: #787774;
-            --accent-color: #2eaadc;
+            /* Mercury-inspired sophisticated color palette */
+            --primary-color: #1a1a1a;
+            --secondary-color: #6b7280;
+            --accent-color: #3b82f6;
+            --accent-secondary: #8b5cf6;
             --background-color: #ffffff;
+            --background-secondary: #f8fafc;
             --card-background: #ffffff;
-            --border-color: #e9e9e7;
-            --hover-color: #f7f6f3;
-            --text-light: #9b9a97;
-            --highlight-bg: #f1f1ef;
+            --border-color: #e2e8f0;
+            --hover-color: #f1f5f9;
+            --text-light: #94a3b8;
+            --highlight-bg: #eff6ff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        * {
+            box-sizing: border-box;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Helvetica, Arial, sans-serif;
+            line-height: 1.65;
             margin: 0;
             padding: 0;
             color: var(--primary-color);
-            background-color: var(--background-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             font-size: 16px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+        
+        /* Glassmorphism effect for main content */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-lg);
+            z-index: -1;
         }
         
         header {
             text-align: left;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
         }
         
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
             color: var(--primary-color);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
         }
         
         .bio {
             text-align: left;
-            max-width: 700px;
-            margin: 0 auto 3rem;
+            max-width: 100%;
+            margin: 0 auto 4rem;
             line-height: 1.7;
         }
         
         .bio p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             color: var(--primary-color);
+            font-size: 1.05rem;
         }
 
         .summary {
-            padding: 0 0 1rem;
+            padding: 1.5rem 2rem;
+            background: var(--card-background);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
 
         .summary h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             text-align: left;
             color: var(--primary-color);
-            margin-bottom: 1.2rem;
-            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .summary ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            line-height: 1.7;
+            line-height: 1.75;
             color: var(--primary-color);
         }
 
         .summary ul li {
-            padding-left: 1.2rem;
+            padding: 0.75rem 0 0.75rem 2rem;
             position: relative;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
         }
 
         .summary ul li::before {
-            content: "•";
+            content: "→";
             color: var(--accent-color);
             position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.1rem;
-            line-height: 1;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .summary ul li:hover::before {
+            transform: translateY(-50%) translateX(4px);
         }
         
         .highlight {
-            background-color: var(--highlight-bg);
-            padding: 2px 4px;
-            border-radius: 3px;
+            background: linear-gradient(120deg, var(--highlight-bg) 0%, rgba(59, 130, 246, 0.1) 100%);
+            padding: 3px 8px;
+            border-radius: 6px;
             box-decoration-break: clone;
             -webkit-box-decoration-break: clone;
             display: inline;
+            font-weight: 600;
         }
 
         .bold {
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--primary-color);
         }
         
         a {
             color: var(--accent-color);
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s ease;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        a:hover {
-            border-bottom: 1px solid var(--accent-color);
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
         }
         
         .section-title {
             text-align: left;
-            margin: 3rem 0 1.5rem;
-            font-size: 1.5rem;
+            margin: 1rem 0 2rem;
+            font-size: 1.75rem;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            position: relative;
+            padding-left: 1rem;
         }
 
-        /* Timeline styles */
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        /* Enhanced Timeline styles */
         .timeline-container {
             margin: 2rem auto;
         }
         
         .timeline {
             position: relative;
-            max-width: 900px;
+            max-width: 100%;
             margin: 0 auto;
         }
         
         .timeline-item {
             width: 100%;
-            padding: 0 0 1.5rem 0;
+            padding: 0 0 2rem 0;
             position: relative;
             box-sizing: border-box;
         }
         
         .timeline-content {
-            padding: 1.2rem;
-            background-color: var(--card-background);
-            border-radius: 4px;
+            padding: 2rem;
+            background: var(--card-background);
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
         
         @media (hover: hover) {
             .timeline-content:hover {
-                background-color: var(--hover-color);
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .timeline-content:hover::before {
+                transform: translateX(0);
             }
         }
         
         .timeline-date {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--accent-color);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .timeline-title {
-            font-size: 1.1rem;
-            margin: 0.3rem 0;
+            font-size: 1.25rem;
+            margin: 0.5rem 0;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
         
         .timeline-company {
             font-style: normal;
             color: var(--secondary-color);
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
         
         .timeline-desc {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--primary-color);
-            line-height: 1.6;
+            line-height: 1.7;
         }
         
         .timeline-desc ul {
-            padding-left: 1.2rem;
-            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            margin: 1rem 0;
         }
         
         .timeline-desc li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
         
-        /* Project styles */
+        /* Enhanced Project styles */
         .projects-container {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             display: none;
-            background-color: var(--hover-color);
-            border-radius: 4px;
-            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
         }
         
         .projects-container.show {
             display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .project-item {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
             border-bottom: 1px solid var(--border-color);
+            background: var(--card-background);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
         }
         
         .project-item:last-child {
             margin-bottom: 0;
-            padding-bottom: 0;
             border-bottom: none;
+        }
+
+        .project-item:hover {
+            box-shadow: var(--shadow-md);
         }
         
         .project-title {
-            font-size: 0.95rem;
-            margin: 0.3rem 0;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
         
         .project-date {
             font-size: 0.85rem;
             color: var(--accent-color);
-            font-weight: 500;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .project-desc {
-            font-size: 0.9rem;
-            margin-top: 0.4rem;
-            color: var(--secondary-color);
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+            /* color: var(--secondary-color); */
+            line-height: 1.7;
+        }
+
+        /* Project experience section styling */
+        .project-desc strong {
+            color: var(--primary-color);
+            font-weight: 700;
+            display: block;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .project-desc strong:first-child {
+            margin-top: 0.75rem;
+        }
+
+        .project-desc ul {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .project-desc ul li {
+            margin-bottom: 0.5rem;
             line-height: 1.6;
+        }
+
+        .project-desc .bold {
+            background: linear-gradient(120deg, var(--highlight-bg) 0%, rgba(59, 130, 246, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
         }
         
         .toggle-projects {
-            display: inline-block;
-            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
             color: var(--accent-color);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            font-weight: 500;
-            border: none;
-            background: none;
-            padding: 4px 8px;
-            border-radius: 3px;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            border: 2px solid var(--accent-color);
+            background: transparent;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle-projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
         
         @media (hover: hover) {
             .toggle-projects:hover {
-                background-color: var(--hover-color);
+                color: white;
+                transform: translateY(-2px);
+            }
+            
+            .toggle-projects:hover::before {
+                left: 0;
             }
         }
         
-        /* Skills section */
+        /* Enhanced Skills section */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
         
         .skill-category {
-            margin-bottom: 1rem;
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-secondary);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
         
         .skill-category-title {
-            font-size: 1rem;
-            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
         
         .skill-category p {
             color: var(--secondary-color);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Navigation anchor for wide screens */
+        .nav-anchor {
+            position: fixed;
+            top: 50%;
+            right: calc(50% - 520px); /* Positioned relative to container edge */
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-anchor:hover {
+            opacity: 1;
+        }
+
+        .nav-anchor ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 0.5rem;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .nav-anchor li {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-anchor li:last-child {
+            margin-bottom: 0;
+        }
+
+        .nav-anchor a {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            display: block;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-anchor a::after {
+            display: none;
+        }
+
+        .nav-anchor a:hover {
+            color: var(--accent-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-anchor a.active {
+            color: var(--accent-color);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        @media (min-width: 1240px) {
+            .nav-anchor {
+                display: block;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .nav-anchor {
+                right: calc(50% - 660px);
+            }
         }
         
+        /* Footer-style social links */
         .social-links {
             display: flex;
-            justify-content: flex-start;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 2rem;
             margin-top: 2rem;
+            padding: 1.5rem 0;
             flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
         }
         
         .social-links a {
             color: var(--secondary-color);
             font-weight: 500;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
         }
         
         .social-links a:hover {
             color: var(--accent-color);
         }
 
+        .social-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive improvements */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem 1rem;
+                margin: 1rem auto;
+                padding: 2rem 1.5rem;
+            }
+            
+            .container::before {
+                border-radius: 16px;
             }
             
             .skills-container {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             .social-links {
-                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .summary {
+                padding: 1.5rem;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .skill-category {
+                padding: 1.5rem;
             }
         }
+
+        /* Smooth scrolling and focus styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        *:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Loading animation for better perceived performance */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container > * {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .container > *:nth-child(2) { animation-delay: 0.1s; }
+        .container > *:nth-child(3) { animation-delay: 0.2s; }
+        .container > *:nth-child(4) { animation-delay: 0.3s; }
+        .container > *:nth-child(5) { animation-delay: 0.4s; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -370,57 +729,117 @@
                     }
                 });
             });
+
+            // Navigation anchor functionality
+            const navLinks = document.querySelectorAll('.nav-anchor a');
+            const sections = document.querySelectorAll('[id]');
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Highlight active section on scroll
+            function updateActiveNavLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Initial call and scroll listener
+            updateActiveNavLink();
+            window.addEventListener('scroll', updateActiveNavLink);
         });
     </script>
     <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Brian Zhu",
-    "url": "https://dogrod.com",
-    "jobTitle": "Machine Learning Engineer",
-    "alumniOf": [
         {
-        "@type": "CollegeOrUniversity",
-        "name": "University of Victoria",
-        "sameAs": "https://www.uvic.ca/"
-        },
-        {
-        "@type": "CollegeOrUniversity",
-        "name": "Honam University",
-        "sameAs": "https://www.honam.ac.kr/"
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Brian Zhu",
+          "jobTitle": "Senior Software Engineer",
+          "description": "Senior Software Engineer with 7+ years experience in scalable infrastructure, frontend/backend systems, and cloud-native platforms.",
+          "url": "https://dogrod.com",
+          "image": "https://dogrod.com/assets/profile.jpg",
+          "sameAs": [
+            "https://github.com/dogrod",
+            "https://www.linkedin.com/in/brianzhu7/",
+            "https://x.com/dogrod_"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Vancouver",
+            "addressRegion": "BC",
+            "addressCountry": "Canada"
+          },
+          "alumniOf": [
+            {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Victoria",
+            "sameAs": "https://www.uvic.ca/"
+            },
+            {
+            "@type": "CollegeOrUniversity",
+            "name": "Honam University",
+            "sameAs": "https://www.honam.ac.kr/"
+            }
+          ],
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Mistong (formerly), Xiaobao Online (formerly)"
+          },
+          "knowsAbout": [
+            "Kubernetes", "React", "Elasticsearch", "Go", "TypeScript", "CI/CD", "System Design", "Frontend Architecture", "Cloud Infrastructure"
+          ],
+          "email": "mailto:brian.zhu77@gmail.com"
         }
-    ],
-    "sameAs": [
-        "https://github.com/dogrod",
-        "https://www.linkedin.com/in/brianzhu7/",
-        "https://x.com/dogrod_"
-    ]
-    }
     </script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="top">
         <header>
             <h1>Hi 👋 I'm Brian</h1>
-            <div class="tagline">An explorer 🥷 , machine learning engineer 🤖 , and code artist ⌨️</div>
+            <div class="tagline">An explorer 🥷 , software engineer 🤖 , and code artist ⌨️</div>
         </header>
 
-        <section class="summary">
+        <section class="summary" id="quick-facts">
             <h2 class="section-title">Quick Facts</h2>
             <ul>
-                <li><span class="bold">7+ years</span> in software development across ML, infra, and software architecture</li>
-                <li>Led engineering teams of <span class="bold">up to 35 developers</span>, including frontend, DevOps, and infrastructure groups</li>
-                <li>Delivered ML-powered search and recommendation systems used by <span class="bold">10M+ users</span></li>
-                <li>Deep hands-on experience with <span class="bold">PyTorch, Kubernetes, Elasticsearch, React, and scalable cloud platforms</span></li>
-                <li>Former Engineering VP direct report and intern program manager (12+ interns)</li>
-                <li>Recently completed MEng in ECE at <a href="https://uvic.ca" target="_blank">University of Victoria</a></li>
-                <li>Actively seeking <span class="bold">Engineering Manager</span> or <span class="bold">MLE/SDE roles</span> in Metro Vancouver</li>
-                <li>Open to collaboration and connection on <a href="https://www.linkedin.com/in/brianzhu7/" target="_blank">LinkedIn</a>.</li>
+                <li><span class="bold">7+ years</span> in software development across full-stack development, infra, and software architecture</li>
+                <li>Built and led high-impact teams of up to <span class="bold">35 engineers</span> across frontend, DevOps, and platform domains</li>
+                <li>Architected systems serving <span class="bold">10M+ users</span>, including search, payments, and internal developer platforms</li>
+                <li>Hands-on with modern stacks: Go, TypeScript, React, Kubernetes, Elasticsearch, Redis, PostgreSQL</li>
+                <li>Led initiatives on <span class="bold">CI/CD standardization, cloud migration (1PB+), and traffic governance</span> across 300+ services</li>
+                <li>Former <span class="bold">direct report to VP of Engineering</span>, managed intern program with <span class="bold">12+ mentees</span></li>
+                <li>Recently completed <span class="bold">M.Eng in Electrical & Computer Engineering</span> at University of Victoria</li>
+                <li>Currently exploring <span class="bold">SDE and senior engineering roles</span> in <span class="bold">Metro Vancouver</span> (open to remote)</li>
+                <li>Open to technical collaboration, side projects, and engineering discussions on <a href="https://www.linkedin.com/in/brianzhu7/" target="_blank">LinkedIn</a>.</li>
             </ul>
         </section>
 
-        <h2 class="section-title">Professional Journey</h2>
+        <h2 class="section-title" id="experience">Professional Journey</h2>
         
         <div class="timeline-container">
             <div class="timeline">
@@ -446,10 +865,10 @@
                                 <div class="project-date">Jul 2022 - Sep 2023</div>
                                 <h4 class="project-title">EWT360 Search Platform – Personalized Course Discovery</h4>
                                 <p class="project-desc">
-                                    <strong>Role:</strong> Software Engineer – Search & Recommendation<br><br>
+                                    <strong>Role:</strong> Software Engineer – Search & Recommendation<br>
                                     
-                                    <strong>Scope & Impact:</strong><br>
-                                    Built a personalized semantic search system for a large-scale learning platform with <span class="bold">10M+ users</span> and <span class="bold">100K+ courses</span>. The new system increased <span class="bold">CTR by 25%</span>, improved course engagement by 10%, and reduced <span class="bold">search abandonment by 30%</span>.<br><br>
+                                    <strong>Scope & Impact:</strong>
+                                    Built a personalized semantic search system for a large-scale learning platform with <span class="bold">10M+ users</span> and <span class="bold">100K+ courses</span>. The new system increased <span class="bold">CTR by 25%</span>, improved course engagement by 10%, and reduced <span class="bold">search abandonment by 30%</span>.<br>
                                     
                                     <strong>My Contributions:</strong>
                                     <ul>
@@ -477,10 +896,10 @@
                                 <div class="project-date">Jan 2022 - Dec 2023</div>
                                 <h4 class="project-title">Mistong R&D Infrastructure Platform – Internal Cloud Platform</h4>
                                 <p class="project-desc">
-                                    <strong>Role:</strong> Infrastructure Engineer / Team Lead<br><br>
+                                    <strong>Role:</strong> Infrastructure Engineer / Team Lead<br>
                                     
-                                    <strong>Scope & Impact:</strong><br>
-                                    Built and maintained an internal cloud platform similar to Azure, serving <span class="bold">300+ internal apps</span> with <span class="bold">peak QPS of 50K+</span>. Enabled seamless infrastructure adoption, service migrations, and controlled deployments across the company.<br><br>
+                                    <strong>Scope & Impact:</strong>
+                                    Built and maintained an internal cloud platform similar to Azure, serving <span class="bold">300+ internal apps</span> with <span class="bold">peak QPS of 50K+</span>. Enabled seamless infrastructure adoption, service migrations, and controlled deployments across the company.<br>
                                     
                                     <strong>My Contributions:</strong>
                                     <ul>
@@ -530,10 +949,10 @@
                                 <div class="project-date">Sep 2020 - Jan 2022</div>
                                 <h4 class="project-title">SchoolPal App – Mobile Ecosystem Launch</h4>
                                 <p class="project-desc">
-                                    <strong>Role:</strong> Frontend Team Lead / Mobile Platform Architect<br><br>
+                                    <strong>Role:</strong> Frontend Team Lead / Mobile Platform Architect<br>
                                     
-                                    <strong>Scope & Impact:</strong><br>
-                                    Led the creation of SchoolPal's first mobile app across iOS and Android as part of a brand-wide platform upgrade. Delivered a complete mobile ecosystem serving educational institutions, built from scratch and designed for growth.<br><br>
+                                    <strong>Scope & Impact:</strong>
+                                    Led the creation of SchoolPal's first mobile app across iOS and Android as part of a brand-wide platform upgrade. Delivered a complete mobile ecosystem serving educational institutions, built from scratch and designed for growth.<br>
                                     
                                     <strong>My Contributions:</strong>
                                     <ul>
@@ -561,10 +980,10 @@
                                 <div class="project-date">Dec 2018 - Aug 2021</div>
                                 <h4 class="project-title">SchoolPal Cloud Pay – C2B Tuition Payment Platform</h4>
                                 <p class="project-desc">
-                                    <strong>Role:</strong> Frontend Tech Lead<br><br>
+                                    <strong>Role:</strong> Frontend Tech Lead<br>
                                     
-                                    <strong>Scope & Impact:</strong><br>
-                                    Developed and scaled a <span class="bold">tuition payment system</span> for parents and students to pay institutions online. The platform grew from <span class="bold">0 to 1M+ users</span> and became a core product line enabling consumer-to-business transactions.<br><br>
+                                    <strong>Scope & Impact:</strong>
+                                    Developed and scaled a <span class="bold">tuition payment system</span> for parents and students to pay institutions online. The platform grew from <span class="bold">0 to 1M+ users</span> and became a core product line enabling consumer-to-business transactions.<br>
                                     
                                     <strong>My Contributions:</strong>
                                     <ul>
@@ -623,7 +1042,7 @@
             </div>
         </div>
 
-        <section class="skills">
+        <section class="skills" id="skills">
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-container">
                 <div class="skill-category">
@@ -645,7 +1064,7 @@
             </div>
         </section>
 
-        <section class="education">
+        <section class="education" id="education">
             <!-- Education Section -->
             <h2 class="section-title">Education</h2>
 
@@ -667,6 +1086,40 @@
     
                             <button class="toggle-projects">Show Projects</button>
                             <div class="projects-container">
+                                <div class="project-item">
+                                    <div class="project-date">Jul 2024 – Jan 2025</div>
+                                    <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
+                                    <p class="project-desc">
+                                        <strong>Role:</strong> Principal Research and Development Engineer<br>
+                                        
+                                        <strong>Scope & Impact:</strong>
+                                        Designed a real-time anomaly detection system to enhance the <span class="bold">security and safety of quadcopter drones</span>, focusing on detecting network intrusions, GPS spoofing, and sensor failures. The system was deployed on an embedded Raspberry Pi and integrated directly with the flight control stack. This project aimed to simulate real-world attack scenarios and provide autonomous defense capabilities.<br>
+                                        
+                                        <strong>My Contributions:</strong>
+                                        <ul>
+                                            <li>Built an <span class="bold">unsupervised anomaly detection pipeline</span> using the Isolation Forest algorithm, deployed on <span class="bold">Raspberry Pi 4B</span> for edge inference.</li>
+                                            <li>Collected and preprocessed <span class="bold">11.5M network traffic samples</span> and <span class="bold">1.25M MAVLink telemetry messages</span> using Python for training and validation.</li>
+                                            <li>Developed detection logic for <span class="bold">Wi-Fi-based network attacks</span>, <span class="bold">GPS spoofing</span>, and <span class="bold">rangefinder anomalies</span> by parsing MAVLink protocols.</li>
+                                            <li>Implemented a <span class="bold">sliding window streaming approach</span> to process sensor and network data in real time with low memory footprint.</li>
+                                            <li>Integrated the pipeline with <span class="bold">Pixhawk 6C</span> flight controller and <span class="bold">ESP8266 Wi-Fi module</span>, enabling live anomaly reporting during flight tests.</li>
+                                        </ul>
+                                        
+                                        <strong>Tech Stack:</strong>
+                                        <ul>
+                                            <li><span class="bold">Hardware:</span> Raspberry Pi 4B, Pixhawk 6C, ESP8266, M10 GPS, rangefinder</li>
+                                            <li><span class="bold">ML & Detection:</span> Isolation Forest, NumPy, Scikit-learn</li>
+                                            <li><span class="bold">Protocols:</span> MAVLink (sensor data, GPS, heartbeat), UDP socket parsing</li>
+                                            <li><span class="bold">Languages & Tools:</span> Python, threading for real-time stream handling, matplotlib for data visualization</li>
+                                        </ul>
+                                        
+                                        <strong>Takeaways:</strong>
+                                        <ul>
+                                            <li>Learned how to design and deploy <span class="bold">lightweight ML models on embedded hardware</span> under resource constraints.</li>
+                                            <li>Gained experience in parsing real-time telemetry and applying <span class="bold">protocol-level validation and anomaly modeling</span> in autonomous systems.</li>
+                                            <li>Developed practical insight into drone security threats and how <span class="bold">network and sensor integrity can be monitored proactively</span>.</li>
+                                        </ul>
+                                    </p>
+                                </div>
                                 <div class="project-item">
                                     <div class="project-date">Jul 2024 – Jan 2025</div>
                                     <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
@@ -701,5 +1154,16 @@
             <a href="https://x.com/dogrod_" target="_blank">X (formerly Twitter)</a>
         </div>
     </div>
+
+    <!-- Navigation anchor for wide screens -->
+    <nav class="nav-anchor">
+        <ul>
+            <li><a href="#top">Top</a></li>
+            <li><a href="#quick-facts">Quick Facts</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+    </nav>
 </body>
 </html>
