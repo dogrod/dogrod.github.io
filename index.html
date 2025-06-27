@@ -545,11 +545,15 @@
             transform: translateY(-50%);
             z-index: 1000;
             display: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            opacity: 0.4;
+            transition: opacity 0.2s ease;
         }
 
         .nav-anchor:hover {
+            opacity: 1;
+        }
+
+        .nav-anchor.scrolling {
             opacity: 1;
         }
 
@@ -557,45 +561,96 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            padding: 0.5rem;
-            border: 1px solid rgba(226, 232, 240, 0.5);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
         }
 
-        .nav-anchor li {
-            margin-bottom: 0.25rem;
+        /* Primary navigation items */
+        .nav-anchor > ul > li {
+            margin-bottom: 0.75rem;
         }
 
-        .nav-anchor li:last-child {
+        .nav-anchor > ul > li:last-child {
             margin-bottom: 0;
         }
 
-        .nav-anchor a {
-            color: var(--text-light);
-            font-size: 0.8rem;
+        .nav-anchor > ul > li > a {
+            color: #666;
+            font-size: 0.95rem;
             font-weight: 500;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.25rem 0;
             display: block;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease-in-out;
             position: relative;
+        }
+
+        /* Secondary navigation items */
+        .nav-anchor .nav-sub {
+            list-style: none;
+            padding: 0;
+            margin: 0.25rem 0 0 1.25rem;
+        }
+
+        .nav-anchor .nav-sub li {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-anchor .nav-sub li:last-child {
+            margin-bottom: 0;
+        }
+
+        .nav-anchor .nav-sub a {
+            color: #999;
+            font-size: 0.85rem;
+            font-weight: 400;
+            padding: 0.15rem 0;
+            display: block;
+            transition: color 0.2s ease-in-out;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
 
         .nav-anchor a::after {
             display: none;
         }
 
-        .nav-anchor a:hover {
-            color: var(--accent-color);
-            background: rgba(59, 130, 246, 0.1);
+        /* Remove browser default click effects */
+        .nav-anchor a {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
-        .nav-anchor a.active {
-            color: var(--accent-color);
-            background: rgba(59, 130, 246, 0.15);
+        .nav-anchor a:focus {
+            outline: none;
+        }
+
+        .nav-anchor a:active {
+            outline: none;
+        }
+
+        /* Hover states - darker but not blue */
+        .nav-anchor > ul > li > a:hover {
+            color: #111;
+        }
+        
+        .nav-anchor .nav-sub a:hover {
+            color: #666;
+        }
+
+        /* Active states - subtle emphasis */
+        .nav-anchor > ul > li > a.active {
+            color: #111;
+            font-weight: 600;
+        }
+
+        .nav-anchor .nav-sub a.active {
+            color: #555;
+            font-weight: 500;
         }
 
         @media (min-width: 1240px) {
@@ -606,16 +661,24 @@
 
         @media (min-width: 1400px) {
             .nav-anchor {
-                right: calc(50% - 660px);
+                right: calc(50% - 720px);
+            }
+        }
+        
+        /* Hide sub-navigation on smaller screens for cleaner look */
+        @media (max-width: 1400px) {
+            .nav-anchor .nav-sub {
+                display: none;
             }
         }
         
         /* Enhanced Projects section */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
             margin: 3rem 0;
+            max-width: 100%;
         }
         
         .project-card {
@@ -752,7 +815,6 @@
             }
             
             .projects-grid {
-                grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
             
@@ -811,8 +873,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Navigation anchor functionality
+            const navAnchor = document.querySelector('.nav-anchor');
             const navLinks = document.querySelectorAll('.nav-anchor a');
             const sections = document.querySelectorAll('[id]');
+            let scrollTimeout;
+            let currentActiveSection = '';
             
             // Smooth scrolling for navigation links
             navLinks.forEach(link => {
@@ -830,28 +895,97 @@
                 });
             });
 
-            // Highlight active section on scroll
-            function updateActiveNavLink() {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
+            // Improved scroll spy using Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Only consider sections in the top portion of viewport
+                threshold: 0
+            };
 
+            const sectionObserver = new IntersectionObserver((entries) => {
+                let visibleSections = entries.filter(entry => entry.isIntersecting);
+                
+                if (visibleSections.length > 0) {
+                    // Find the section closest to the top of the viewport
+                    let topMostSection = visibleSections.reduce((closest, entry) => {
+                        const currentTop = entry.boundingClientRect.top;
+                        const closestTop = closest.boundingClientRect.top;
+                        return Math.abs(currentTop) < Math.abs(closestTop) ? entry : closest;
+                    });
+                    
+                    const newActiveSection = topMostSection.target.id;
+                    
+                    // Only update if the active section has changed
+                    if (newActiveSection !== currentActiveSection) {
+                        currentActiveSection = newActiveSection;
+                        updateActiveNavLink(newActiveSection);
+                    }
+                }
+            }, observerOptions);
+
+            // Observe all sections
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Update navigation active states
+            function updateActiveNavLink(activeId) {
+                // Clear all active states
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
-                        link.classList.add('active');
-                    }
                 });
+
+                // Find and activate the current section link
+                const activeLink = document.querySelector(`.nav-anchor a[href="#${activeId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    
+                    // If it's a sub-item, also highlight the parent
+                    const parentLi = activeLink.closest('li');
+                    if (parentLi && parentLi.parentElement.classList.contains('nav-sub')) {
+                        const parentLink = parentLi.parentElement.previousElementSibling;
+                        if (parentLink && parentLink.tagName === 'A') {
+                            parentLink.classList.add('active');
+                        }
+                    }
+                }
+                
+                // Handle subsection parent highlighting
+                if (activeId.includes('-experience')) {
+                    const experienceLink = document.querySelector('.nav-anchor a[href="#experience"]');
+                    if (experienceLink) experienceLink.classList.add('active');
+                }
+                else if (activeId.includes('-project')) {
+                    const projectsLink = document.querySelector('.nav-anchor a[href="#projects"]');
+                    if (projectsLink) projectsLink.classList.add('active');
+                }
+                else if (activeId.includes('-education')) {
+                    const educationLink = document.querySelector('.nav-anchor a[href="#education"]');
+                    if (educationLink) educationLink.classList.add('active');
+                }
             }
 
-            // Initial call and scroll listener
-            updateActiveNavLink();
-            window.addEventListener('scroll', updateActiveNavLink);
+            // Handle scroll opacity behavior
+            function handleScrollOpacity() {
+                navAnchor.classList.add('scrolling');
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    navAnchor.classList.remove('scrolling');
+                }, 1000);
+            }
+
+            // Listen for scroll events for opacity management
+            window.addEventListener('scroll', handleScrollOpacity);
+            
+            // Initial setup - find the section currently in view
+            const initialSection = Array.from(sections).find(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0;
+            });
+            
+            if (initialSection) {
+                updateActiveNavLink(initialSection.id);
+            }
         });
     </script>
     <script type="application/ld+json">
@@ -1023,7 +1157,7 @@
             
             <div class="projects-grid">
                 <!-- EWT360 Search Platform -->
-                <div class="project-card">
+                <div class="project-card" id="ewt360-project">
                     <div class="project-date">Jul 2022 - Sep 2023</div>
                     <h4 class="project-title">EWT360 Search Platform – Personalized Course Discovery</h4>
                     <div class="project-reference">Related to: <a href="#mistong-experience">Infra Team Lead @ Mistong</a></div>
@@ -1057,7 +1191,7 @@
                 </div>
 
                 <!-- Mistong R&D Infrastructure Platform -->
-                <div class="project-card">
+                <div class="project-card" id="mistong-infra-project">
                     <div class="project-date">Jan 2022 - Dec 2023</div>
                     <h4 class="project-title">Mistong R&D Infrastructure Platform – Internal Cloud Platform</h4>
                     <div class="project-reference">Related to: <a href="#mistong-experience">Infra Team Lead @ Mistong</a></div>
@@ -1091,7 +1225,7 @@
                 </div>
 
                 <!-- SchoolPal App -->
-                <div class="project-card">
+                <div class="project-card" id="schoolpal-app-project">
                     <div class="project-date">Sep 2020 - Jan 2022</div>
                     <h4 class="project-title">SchoolPal App – Mobile Ecosystem Launch</h4>
                     <div class="project-reference">Related to: <a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></div>
@@ -1125,7 +1259,7 @@
                 </div>
 
                 <!-- SchoolPal Cloud Pay -->
-                <div class="project-card">
+                <div class="project-card" id="schoolpal-pay-project">
                     <div class="project-date">Dec 2018 - Aug 2021</div>
                     <h4 class="project-title">SchoolPal Cloud Pay – C2B Tuition Payment Platform</h4>
                     <div class="project-reference">Related to: <a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></div>
@@ -1158,7 +1292,7 @@
                 </div>
 
                 <!-- Drone Security Research -->
-                <div class="project-card">
+                <div class="project-card" id="drone-security-project">
                     <div class="project-date">Jul 2024 – Jan 2025</div>
                     <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
                     <div class="project-reference">Related to: <a href="#uvic-education">MEng @ University of Victoria</a></div>
@@ -1218,7 +1352,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item right">
+                    <div class="timeline-item right" id="honam-education">
                         <div class="timeline-content">
                             <div class="timeline-date">Sep 2012 – Aug 2016</div>
                             <h3 class="timeline-title">BEng, Information and Communication Engineering</h3>
@@ -1241,10 +1375,33 @@
         <ul>
             <li><a href="#top">Top</a></li>
             <li><a href="#quick-facts">Quick Facts</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
+            <li>
+                <a href="#experience">Professional Journey</a>
+                <ul class="nav-sub">
+                    <li><a href="#mistong-experience">Infra Team Lead @ Mistong</a></li>
+                    <li><a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></li>
+                    <li><a href="#xkeshi-experience">Senior Front-end @ Xkeshi</a></li>
+                    <li><a href="#zhuliyan-experience">Front-end Dev @ Zhuliyan</a></li>
+                </ul>
+            </li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li>
+                <a href="#projects">Selected Projects</a>
+                <ul class="nav-sub">
+                    <li><a href="#ewt360-project">EWT360 Search Platform</a></li>
+                    <li><a href="#mistong-infra-project">Mistong R&D Platform</a></li>
+                    <li><a href="#schoolpal-app-project">SchoolPal App</a></li>
+                    <li><a href="#schoolpal-pay-project">SchoolPal Cloud Pay</a></li>
+                    <li><a href="#drone-security-project">Drone Security Research</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+                <ul class="nav-sub">
+                    <li><a href="#uvic-education">MEng @ UVic</a></li>
+                    <li><a href="#honam-education">BEng @ Honam</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </body>
