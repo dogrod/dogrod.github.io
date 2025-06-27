@@ -545,11 +545,15 @@
             transform: translateY(-50%);
             z-index: 1000;
             display: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            opacity: 0.4;
+            transition: opacity 0.2s ease;
         }
 
         .nav-anchor:hover {
+            opacity: 1;
+        }
+
+        .nav-anchor.scrolling {
             opacity: 1;
         }
 
@@ -557,45 +561,96 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            padding: 0.5rem;
-            border: 1px solid rgba(226, 232, 240, 0.5);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
         }
 
-        .nav-anchor li {
-            margin-bottom: 0.25rem;
+        /* Primary navigation items */
+        .nav-anchor > ul > li {
+            margin-bottom: 0.75rem;
         }
 
-        .nav-anchor li:last-child {
+        .nav-anchor > ul > li:last-child {
             margin-bottom: 0;
         }
 
-        .nav-anchor a {
-            color: var(--text-light);
-            font-size: 0.8rem;
+        .nav-anchor > ul > li > a {
+            color: #666;
+            font-size: 0.95rem;
             font-weight: 500;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.25rem 0;
             display: block;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease-in-out;
             position: relative;
+        }
+
+        /* Secondary navigation items */
+        .nav-anchor .nav-sub {
+            list-style: none;
+            padding: 0;
+            margin: 0.25rem 0 0 1.25rem;
+        }
+
+        .nav-anchor .nav-sub li {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-anchor .nav-sub li:last-child {
+            margin-bottom: 0;
+        }
+
+        .nav-anchor .nav-sub a {
+            color: #999;
+            font-size: 0.85rem;
+            font-weight: 400;
+            padding: 0.15rem 0;
+            display: block;
+            transition: color 0.2s ease-in-out;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
 
         .nav-anchor a::after {
             display: none;
         }
 
-        .nav-anchor a:hover {
-            color: var(--accent-color);
-            background: rgba(59, 130, 246, 0.1);
+        /* Remove browser default click effects */
+        .nav-anchor a {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
-        .nav-anchor a.active {
-            color: var(--accent-color);
-            background: rgba(59, 130, 246, 0.15);
+        .nav-anchor a:focus {
+            outline: none;
+        }
+
+        .nav-anchor a:active {
+            outline: none;
+        }
+
+        /* Hover states - darker but not blue */
+        .nav-anchor > ul > li > a:hover {
+            color: #111;
+        }
+        
+        .nav-anchor .nav-sub a:hover {
+            color: #666;
+        }
+
+        /* Active states - subtle emphasis */
+        .nav-anchor > ul > li > a.active {
+            color: #111;
+            font-weight: 600;
+        }
+
+        .nav-anchor .nav-sub a.active {
+            color: #555;
+            font-weight: 500;
         }
 
         @media (min-width: 1240px) {
@@ -606,10 +661,105 @@
 
         @media (min-width: 1400px) {
             .nav-anchor {
-                right: calc(50% - 660px);
+                right: calc(50% - 720px);
             }
         }
         
+        /* Hide sub-navigation on smaller screens for cleaner look */
+        @media (max-width: 1400px) {
+            .nav-anchor .nav-sub {
+                display: none;
+            }
+        }
+        
+        /* Enhanced Projects section */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 100%;
+        }
+        
+        .project-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        @media (hover: hover) {
+            .project-card:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .project-card:hover::before {
+                transform: translateX(0);
+            }
+        }
+        
+        .project-card .project-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .project-card .project-title {
+            font-size: 1.25rem;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        
+        .project-reference {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .project-reference a {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .project-card .project-desc {
+            font-size: 1rem;
+            color: var(--primary-color);
+            line-height: 1.7;
+        }
+        
+        .project-card .project-desc ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .project-card .project-desc li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
         /* Footer-style social links */
         .social-links {
             display: flex;
@@ -664,6 +814,10 @@
                 gap: 1.5rem;
             }
             
+            .projects-grid {
+                gap: 1.5rem;
+            }
+            
             .social-links {
                 gap: 1.5rem;
             }
@@ -677,6 +831,10 @@
             }
 
             .skill-category {
+                padding: 1.5rem;
+            }
+            
+            .project-card {
                 padding: 1.5rem;
             }
         }
@@ -714,25 +872,12 @@
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const toggleButtons = document.querySelectorAll('.toggle-projects');
-            
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const projectsContainer = this.nextElementSibling;
-                    
-                    if (projectsContainer.classList.contains('show')) {
-                        projectsContainer.classList.remove('show');
-                        this.textContent = 'Show Projects';
-                    } else {
-                        projectsContainer.classList.add('show');
-                        this.textContent = 'Hide Projects';
-                    }
-                });
-            });
-
             // Navigation anchor functionality
+            const navAnchor = document.querySelector('.nav-anchor');
             const navLinks = document.querySelectorAll('.nav-anchor a');
             const sections = document.querySelectorAll('[id]');
+            let scrollTimeout;
+            let currentActiveSection = '';
             
             // Smooth scrolling for navigation links
             navLinks.forEach(link => {
@@ -750,28 +895,97 @@
                 });
             });
 
-            // Highlight active section on scroll
-            function updateActiveNavLink() {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
+            // Improved scroll spy using Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Only consider sections in the top portion of viewport
+                threshold: 0
+            };
 
+            const sectionObserver = new IntersectionObserver((entries) => {
+                let visibleSections = entries.filter(entry => entry.isIntersecting);
+                
+                if (visibleSections.length > 0) {
+                    // Find the section closest to the top of the viewport
+                    let topMostSection = visibleSections.reduce((closest, entry) => {
+                        const currentTop = entry.boundingClientRect.top;
+                        const closestTop = closest.boundingClientRect.top;
+                        return Math.abs(currentTop) < Math.abs(closestTop) ? entry : closest;
+                    });
+                    
+                    const newActiveSection = topMostSection.target.id;
+                    
+                    // Only update if the active section has changed
+                    if (newActiveSection !== currentActiveSection) {
+                        currentActiveSection = newActiveSection;
+                        updateActiveNavLink(newActiveSection);
+                    }
+                }
+            }, observerOptions);
+
+            // Observe all sections
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Update navigation active states
+            function updateActiveNavLink(activeId) {
+                // Clear all active states
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
-                        link.classList.add('active');
-                    }
                 });
+
+                // Find and activate the current section link
+                const activeLink = document.querySelector(`.nav-anchor a[href="#${activeId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    
+                    // If it's a sub-item, also highlight the parent
+                    const parentLi = activeLink.closest('li');
+                    if (parentLi && parentLi.parentElement.classList.contains('nav-sub')) {
+                        const parentLink = parentLi.parentElement.previousElementSibling;
+                        if (parentLink && parentLink.tagName === 'A') {
+                            parentLink.classList.add('active');
+                        }
+                    }
+                }
+                
+                // Handle subsection parent highlighting
+                if (activeId.includes('-experience')) {
+                    const experienceLink = document.querySelector('.nav-anchor a[href="#experience"]');
+                    if (experienceLink) experienceLink.classList.add('active');
+                }
+                else if (activeId.includes('-project')) {
+                    const projectsLink = document.querySelector('.nav-anchor a[href="#projects"]');
+                    if (projectsLink) projectsLink.classList.add('active');
+                }
+                else if (activeId.includes('-education')) {
+                    const educationLink = document.querySelector('.nav-anchor a[href="#education"]');
+                    if (educationLink) educationLink.classList.add('active');
+                }
             }
 
-            // Initial call and scroll listener
-            updateActiveNavLink();
-            window.addEventListener('scroll', updateActiveNavLink);
+            // Handle scroll opacity behavior
+            function handleScrollOpacity() {
+                navAnchor.classList.add('scrolling');
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    navAnchor.classList.remove('scrolling');
+                }, 1000);
+            }
+
+            // Listen for scroll events for opacity management
+            window.addEventListener('scroll', handleScrollOpacity);
+            
+            // Initial setup - find the section currently in view
+            const initialSection = Array.from(sections).find(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0;
+            });
+            
+            if (initialSection) {
+                updateActiveNavLink(initialSection.id);
+            }
         });
     </script>
     <script type="application/ld+json">
@@ -844,7 +1058,7 @@
         <div class="timeline-container">
             <div class="timeline">
                 <!-- Mistong -->
-                <div class="timeline-item right">
+                <div class="timeline-item right" id="mistong-experience">
                     <div class="timeline-content">
                         <div class="timeline-date">Jan 2022 - Dec 2023</div>
                         <h3 class="timeline-title">Infra Team Lead, Architect</h3>
@@ -858,77 +1072,11 @@
                                 <li>Published a technical case study in collaboration with Alibaba Cloud, highlighting serverless implementation best practices and system scalability. <a href="https://www.alibabacloud.com/blog/600160" target="_blank">View</a></li>
                             </ul>
                         </p>
-                        
-                        <button class="toggle-projects">Show Projects</button>
-                        <div class="projects-container">
-                            <div class="project-item">
-                                <div class="project-date">Jul 2022 - Sep 2023</div>
-                                <h4 class="project-title">EWT360 Search Platform – Personalized Course Discovery</h4>
-                                <p class="project-desc">
-                                    <strong>Role:</strong> Software Engineer – Search & Recommendation<br>
-                                    
-                                    <strong>Scope & Impact:</strong>
-                                    Built a personalized semantic search system for a large-scale learning platform with <span class="bold">10M+ users</span> and <span class="bold">100K+ courses</span>. The new system increased <span class="bold">CTR by 25%</span>, improved course engagement by 10%, and reduced <span class="bold">search abandonment by 30%</span>.<br>
-                                    
-                                    <strong>My Contributions:</strong>
-                                    <ul>
-                                        <li>Developed a <span class="bold">hybrid search pipeline</span> combining BM25 (Elasticsearch) with vector retrieval (Redis, Faiss) for better relevance.</li>
-                                        <li>Designed and deployed an <span class="bold">embedding generation pipeline</span> for user profiles and course content using 1PB+ of interaction data.</li>
-                                        <li>Worked with data scientists and product managers to integrate A/B testing and ranking signals into production.</li>
-                                    </ul>
-                                    
-                                    <strong>Tech Stack:</strong>
-                                    <ul>
-                                        <li><span class="bold">Languages:</span> Python (PyTorch)</li>
-                                        <li><span class="bold">ML/Retrieval:</span> BERT-based two-tower model, Redis (vector store)</li>
-                                        <li><span class="bold">Infra:</span> Redis, Elasticsearch, Spark, Kafka</li>
-                                        <li><span class="bold">Deployment:</span> Docker, Kubernetes</li>
-                                    </ul>
-                                    
-                                    <strong>Takeaways:</strong>
-                                    <ul>
-                                        <li>Learned to balance latency and relevance when deploying vector search in production.</li>
-                                        <li>Gained experience in building search systems with measurable product metrics and iterative optimization.</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div class="project-item">
-                                <div class="project-date">Jan 2022 - Dec 2023</div>
-                                <h4 class="project-title">Mistong R&D Infrastructure Platform – Internal Cloud Platform</h4>
-                                <p class="project-desc">
-                                    <strong>Role:</strong> Infrastructure Engineer / Team Lead<br>
-                                    
-                                    <strong>Scope & Impact:</strong>
-                                    Built and maintained an internal cloud platform similar to Azure, serving <span class="bold">300+ internal apps</span> with <span class="bold">peak QPS of 50K+</span>. Enabled seamless infrastructure adoption, service migrations, and controlled deployments across the company.<br>
-                                    
-                                    <strong>My Contributions:</strong>
-                                    <ul>
-                                        <li>Led the <span class="bold">zero-downtime migration</span> of 100+ frontend apps and 200+ Java services to Alibaba Cloud.</li>
-                                        <li>Built a dynamic rendering service and routing layer to improve frontend delivery and SEO.</li>
-                                        <li>Designed a <span class="bold">traffic governance system</span> supporting feature flags, canary releases, and rollout policies using APISIX and Zuul.</li>
-                                    </ul>
-                                    
-                                    <strong>Tech Stack:</strong>
-                                    <ul>
-                                        <li><span class="bold">Infra:</span> Kubernetes, APISIX, Zuul, Alibaba Cloud</li>
-                                        <li><span class="bold">Languages:</span> Go, Java, TypeScript, Shell</li>
-                                        <li><span class="bold">Monitoring:</span> Prometheus, Grafana, Alibaba Cloud SLS</li>
-                                        <li><span class="bold">Tooling:</span> Helm, GitLab CI, Alibaba Cloud ACK</li>
-                                    </ul>
-                                    
-                                    <strong>Takeaways:</strong>
-                                    <ul>
-                                        <li>Learned to build reliable infra platforms at scale with multi-team adoption.</li>
-                                        <li>Developed systems thinking to handle rollout risk, backward compatibility, and platform UX for developers.</li>
-                                    </ul>
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
                 <!-- Xiaobao -->
-                <div class="timeline-item left">
+                <div class="timeline-item left" id="xiaobao-experience">
                     <div class="timeline-content">
                         <div class="timeline-date">Dec 2018 - Jan 2022</div>
                         <h3 class="timeline-title">Front-end Team Lead</h3>
@@ -942,76 +1090,11 @@
                                 <li>Developed a mobile application service platform using React Native and TypeScript, enhancing mobile service delivery.</li>
                             </ul>
                         </p>
-                        
-                        <button class="toggle-projects">Show Projects</button>
-                        <div class="projects-container">
-                            <div class="project-item">
-                                <div class="project-date">Sep 2020 - Jan 2022</div>
-                                <h4 class="project-title">SchoolPal App – Mobile Ecosystem Launch</h4>
-                                <p class="project-desc">
-                                    <strong>Role:</strong> Frontend Team Lead / Mobile Platform Architect<br>
-                                    
-                                    <strong>Scope & Impact:</strong>
-                                    Led the creation of SchoolPal's first mobile app across iOS and Android as part of a brand-wide platform upgrade. Delivered a complete mobile ecosystem serving educational institutions, built from scratch and designed for growth.<br>
-                                    
-                                    <strong>My Contributions:</strong>
-                                    <ul>
-                                        <li>Designed and led the architecture for the cross-platform mobile app using React Native.</li>
-                                        <li>Integrated native features (push notifications, telemetry) via custom bridges to Objective-C, Swift, and Java.</li>
-                                        <li>Collaborated with backend, product, and design teams to align infrastructure and product goals.</li>
-                                    </ul>
-                                    
-                                    <strong>Tech Stack:</strong>
-                                    <ul>
-                                        <li><span class="bold">Frontend:</span> React Native, Vue.js, TypeScript</li>
-                                        <li><span class="bold">Build:</span> Vite, webpack</li>
-                                        <li><span class="bold">Mobile Native:</span> Objective-C, Swift, Java</li>
-                                        <li><span class="bold">Monitoring & Messaging:</span> Native SDKs, RN bridge integration</li>
-                                    </ul>
-                                    
-                                    <strong>Takeaways:</strong>
-                                    <ul>
-                                        <li>Learned how to launch greenfield mobile platforms while aligning with business and product priorities.</li>
-                                        <li>Improved cross-team collaboration and architectural planning for long-term codebase sustainability.</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div class="project-item">
-                                <div class="project-date">Dec 2018 - Aug 2021</div>
-                                <h4 class="project-title">SchoolPal Cloud Pay – C2B Tuition Payment Platform</h4>
-                                <p class="project-desc">
-                                    <strong>Role:</strong> Frontend Tech Lead<br>
-                                    
-                                    <strong>Scope & Impact:</strong>
-                                    Developed and scaled a <span class="bold">tuition payment system</span> for parents and students to pay institutions online. The platform grew from <span class="bold">0 to 1M+ users</span> and became a core product line enabling consumer-to-business transactions.<br>
-                                    
-                                    <strong>My Contributions:</strong>
-                                    <ul>
-                                        <li>Led the frontend-backend separation for the platform, improving dev velocity and system clarity.</li>
-                                        <li>Rebuilt the cashier interface, reducing <span class="bold">Time to Interactive</span> from 2.4s to 0.6s and improving rendering by 40%.</li>
-                                        <li>Defined performance KPIs and established baseline profiling practices across multiple releases.</li>
-                                    </ul>
-                                    
-                                    <strong>Tech Stack:</strong>
-                                    <ul>
-                                        <li><span class="bold">Frontend:</span> Vue.js, TypeScript, Less.js</li>
-                                        <li><span class="bold">Tooling:</span> webpack (chunking, lazy loading, prefetching), Lighthouse, DevTools</li>
-                                        <li><span class="bold">Architecture:</span> Component-based UI, API-first integration, frontend-backend separation</li>
-                                    </ul>
-                                    
-                                    <strong>Takeaways:</strong>
-                                    <ul>
-                                        <li>Learned to lead architectural changes across product, engineering, and operations teams.</li>
-                                        <li>Built deeper expertise in tying frontend performance to tangible business outcomes.</li>
-                                    </ul>
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Xkeshi-->
-                <div class="timeline-item right">
+                <div class="timeline-item right" id="xkeshi-experience">
                     <div class="timeline-content">
                         <div class="timeline-date">Mar 2017 – Dec 2018</div>
                         <h3 class="timeline-title">Senior Front-end Engineer</h3>
@@ -1026,7 +1109,7 @@
                 </div>
 
                 <!-- Zhuliyan -->
-                <div class="timeline-item right">
+                <div class="timeline-item right" id="zhuliyan-experience">
                     <div class="timeline-content">
                         <div class="timeline-date">Jul 2016 – Mar 2017</div>
                         <h3 class="timeline-title">Front-end Developer</h3>
@@ -1069,13 +1152,191 @@
             
         </section>
 
+        <section class="projects" id="projects">
+            <h2 class="section-title">Selected Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- EWT360 Search Platform -->
+                <div class="project-card" id="ewt360-project">
+                    <div class="project-date">Jul 2022 - Sep 2023</div>
+                    <h4 class="project-title">EWT360 Search Platform – Personalized Course Discovery</h4>
+                    <div class="project-reference">Related to: <a href="#mistong-experience">Infra Team Lead @ Mistong</a></div>
+                    <div class="project-desc">
+                        <strong>Role:</strong> Software Engineer – Search & Recommendation<br>
+                        
+                        <strong>Scope & Impact:</strong>
+                        Built a personalized semantic search system for a large-scale learning platform with <span class="bold">10M+ users</span> and <span class="bold">100K+ courses</span>. The new system increased <span class="bold">CTR by 25%</span>, improved course engagement by 10%, and reduced <span class="bold">search abandonment by 30%</span>.<br>
+                        
+                        <strong>My Contributions:</strong>
+                        <ul>
+                            <li>Developed a <span class="bold">hybrid search pipeline</span> combining BM25 (Elasticsearch) with vector retrieval (Redis, Faiss) for better relevance.</li>
+                            <li>Designed and deployed an <span class="bold">embedding generation pipeline</span> for user profiles and course content using 1PB+ of interaction data.</li>
+                            <li>Worked with data scientists and product managers to integrate A/B testing and ranking signals into production.</li>
+                        </ul>
+                        
+                        <strong>Tech Stack:</strong>
+                        <ul>
+                            <li><span class="bold">Languages:</span> Python (PyTorch)</li>
+                            <li><span class="bold">ML/Retrieval:</span> BERT-based two-tower model, Redis (vector store)</li>
+                            <li><span class="bold">Infra:</span> Redis, Elasticsearch, Spark, Kafka</li>
+                            <li><span class="bold">Deployment:</span> Docker, Kubernetes</li>
+                        </ul>
+                        
+                        <strong>Takeaways:</strong>
+                        <ul>
+                            <li>Learned to balance latency and relevance when deploying vector search in production.</li>
+                            <li>Gained experience in building search systems with measurable product metrics and iterative optimization.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mistong R&D Infrastructure Platform -->
+                <div class="project-card" id="mistong-infra-project">
+                    <div class="project-date">Jan 2022 - Dec 2023</div>
+                    <h4 class="project-title">Mistong R&D Infrastructure Platform – Internal Cloud Platform</h4>
+                    <div class="project-reference">Related to: <a href="#mistong-experience">Infra Team Lead @ Mistong</a></div>
+                    <div class="project-desc">
+                        <strong>Role:</strong> Infrastructure Engineer / Team Lead<br>
+                        
+                        <strong>Scope & Impact:</strong>
+                        Built and maintained an internal cloud platform similar to Azure, serving <span class="bold">300+ internal apps</span> with <span class="bold">peak QPS of 50K+</span>. Enabled seamless infrastructure adoption, service migrations, and controlled deployments across the company.<br>
+                        
+                        <strong>My Contributions:</strong>
+                        <ul>
+                            <li>Led the <span class="bold">zero-downtime migration</span> of 100+ frontend apps and 200+ Java services to Alibaba Cloud.</li>
+                            <li>Built a dynamic rendering service and routing layer to improve frontend delivery and SEO.</li>
+                            <li>Designed a <span class="bold">traffic governance system</span> supporting feature flags, canary releases, and rollout policies using APISIX and Zuul.</li>
+                        </ul>
+                        
+                        <strong>Tech Stack:</strong>
+                        <ul>
+                            <li><span class="bold">Infra:</span> Kubernetes, APISIX, Zuul, Alibaba Cloud</li>
+                            <li><span class="bold">Languages:</span> Go, Java, TypeScript, Shell</li>
+                            <li><span class="bold">Monitoring:</span> Prometheus, Grafana, Alibaba Cloud SLS</li>
+                            <li><span class="bold">Tooling:</span> Helm, GitLab CI, Alibaba Cloud ACK</li>
+                        </ul>
+                        
+                        <strong>Takeaways:</strong>
+                        <ul>
+                            <li>Learned to build reliable infra platforms at scale with multi-team adoption.</li>
+                            <li>Developed systems thinking to handle rollout risk, backward compatibility, and platform UX for developers.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SchoolPal App -->
+                <div class="project-card" id="schoolpal-app-project">
+                    <div class="project-date">Sep 2020 - Jan 2022</div>
+                    <h4 class="project-title">SchoolPal App – Mobile Ecosystem Launch</h4>
+                    <div class="project-reference">Related to: <a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></div>
+                    <div class="project-desc">
+                        <strong>Role:</strong> Frontend Team Lead / Mobile Platform Architect<br>
+                        
+                        <strong>Scope & Impact:</strong>
+                        Led the creation of SchoolPal's first mobile app across iOS and Android as part of a brand-wide platform upgrade. Delivered a complete mobile ecosystem serving educational institutions, built from scratch and designed for growth.<br>
+                        
+                        <strong>My Contributions:</strong>
+                        <ul>
+                            <li>Designed and led the architecture for the cross-platform mobile app using React Native.</li>
+                            <li>Integrated native features (push notifications, telemetry) via custom bridges to Objective-C, Swift, and Java.</li>
+                            <li>Collaborated with backend, product, and design teams to align infrastructure and product goals.</li>
+                        </ul>
+                        
+                        <strong>Tech Stack:</strong>
+                        <ul>
+                            <li><span class="bold">Frontend:</span> React Native, Vue.js, TypeScript</li>
+                            <li><span class="bold">Build:</span> Vite, webpack</li>
+                            <li><span class="bold">Mobile Native:</span> Objective-C, Swift, Java</li>
+                            <li><span class="bold">Monitoring & Messaging:</span> Native SDKs, RN bridge integration</li>
+                        </ul>
+                        
+                        <strong>Takeaways:</strong>
+                        <ul>
+                            <li>Learned how to launch greenfield mobile platforms while aligning with business and product priorities.</li>
+                            <li>Improved cross-team collaboration and architectural planning for long-term codebase sustainability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SchoolPal Cloud Pay -->
+                <div class="project-card" id="schoolpal-pay-project">
+                    <div class="project-date">Dec 2018 - Aug 2021</div>
+                    <h4 class="project-title">SchoolPal Cloud Pay – C2B Tuition Payment Platform</h4>
+                    <div class="project-reference">Related to: <a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></div>
+                    <div class="project-desc">
+                        <strong>Role:</strong> Frontend Tech Lead<br>
+                        
+                        <strong>Scope & Impact:</strong>
+                        Developed and scaled a <span class="bold">tuition payment system</span> for parents and students to pay institutions online. The platform grew from <span class="bold">0 to 1M+ users</span> and became a core product line enabling consumer-to-business transactions.<br>
+                        
+                        <strong>My Contributions:</strong>
+                        <ul>
+                            <li>Led the frontend-backend separation for the platform, improving dev velocity and system clarity.</li>
+                            <li>Rebuilt the cashier interface, reducing <span class="bold">Time to Interactive</span> from 2.4s to 0.6s and improving rendering by 40%.</li>
+                            <li>Defined performance KPIs and established baseline profiling practices across multiple releases.</li>
+                        </ul>
+                        
+                        <strong>Tech Stack:</strong>
+                        <ul>
+                            <li><span class="bold">Frontend:</span> Vue.js, TypeScript, Less.js</li>
+                            <li><span class="bold">Tooling:</span> webpack (chunking, lazy loading, prefetching), Lighthouse, DevTools</li>
+                            <li><span class="bold">Architecture:</span> Component-based UI, API-first integration, frontend-backend separation</li>
+                        </ul>
+                        
+                        <strong>Takeaways:</strong>
+                        <ul>
+                            <li>Learned to lead architectural changes across product, engineering, and operations teams.</li>
+                            <li>Built deeper expertise in tying frontend performance to tangible business outcomes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Drone Security Research -->
+                <div class="project-card" id="drone-security-project">
+                    <div class="project-date">Jul 2024 – Jan 2025</div>
+                    <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
+                    <div class="project-reference">Related to: <a href="#uvic-education">MEng @ University of Victoria</a></div>
+                    <div class="project-desc">
+                        <strong>Role:</strong> Principal Research and Development Engineer<br>
+                        
+                        <strong>Scope & Impact:</strong>
+                        Designed a real-time anomaly detection system to enhance the <span class="bold">security and safety of quadcopter drones</span>, focusing on detecting network intrusions, GPS spoofing, and sensor failures. The system was deployed on an embedded Raspberry Pi and integrated directly with the flight control stack. This project aimed to simulate real-world attack scenarios and provide autonomous defense capabilities.<br>
+                        
+                        <strong>My Contributions:</strong>
+                        <ul>
+                            <li>Built an <span class="bold">unsupervised anomaly detection pipeline</span> using the Isolation Forest algorithm, deployed on <span class="bold">Raspberry Pi 4B</span> for edge inference.</li>
+                            <li>Collected and preprocessed <span class="bold">11.5M network traffic samples</span> and <span class="bold">1.25M MAVLink telemetry messages</span> using Python for training and validation.</li>
+                            <li>Developed detection logic for <span class="bold">Wi-Fi-based network attacks</span>, <span class="bold">GPS spoofing</span>, and <span class="bold">rangefinder anomalies</span> by parsing MAVLink protocols.</li>
+                            <li>Implemented a <span class="bold">sliding window streaming approach</span> to process sensor and network data in real time with low memory footprint.</li>
+                            <li>Integrated the pipeline with <span class="bold">Pixhawk 6C</span> flight controller and <span class="bold">ESP8266 Wi-Fi module</span>, enabling live anomaly reporting during flight tests.</li>
+                        </ul>
+                        
+                        <strong>Tech Stack:</strong>
+                        <ul>
+                            <li><span class="bold">Hardware:</span> Raspberry Pi 4B, Pixhawk 6C, ESP8266, M10 GPS, rangefinder</li>
+                            <li><span class="bold">ML & Detection:</span> Isolation Forest, NumPy, Scikit-learn</li>
+                            <li><span class="bold">Protocols:</span> MAVLink (sensor data, GPS, heartbeat), UDP socket parsing</li>
+                            <li><span class="bold">Languages & Tools:</span> Python, threading for real-time stream handling, matplotlib for data visualization</li>
+                        </ul>
+                        
+                        <strong>Takeaways:</strong>
+                        <ul>
+                            <li>Learned how to design and deploy <span class="bold">lightweight ML models on embedded hardware</span> under resource constraints.</li>
+                            <li>Gained experience in parsing real-time telemetry and applying <span class="bold">protocol-level validation and anomaly modeling</span> in autonomous systems.</li>
+                            <li>Developed practical insight into drone security threats and how <span class="bold">network and sensor integrity can be monitored proactively</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="education" id="education">
             <!-- Education Section -->
             <h2 class="section-title">Education</h2>
 
             <div class="timeline-container">
                 <div class="timeline">
-                    <div class="timeline-item left">
+                    <div class="timeline-item left" id="uvic-education">
                         <div class="timeline-content">
                             <div class="timeline-date">Jan 2024 - Dec 2024</div>
                             <h3 class="timeline-title">MEng, Electrical and Computer Engineering</h3>
@@ -1088,61 +1349,10 @@
                                     <li>Supported the deployment of an on-device detection pipeline on Raspberry Pi 4B, achieving 99% accuracy on network threats and 95% on sensor faults with real-time performance constraints.</li>
                                 </ul>
                             </p>
-    
-                            <button class="toggle-projects">Show Projects</button>
-                            <div class="projects-container">
-                                <div class="project-item">
-                                    <div class="project-date">Jul 2024 – Jan 2025</div>
-                                    <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
-                                    <p class="project-desc">
-                                        <strong>Role:</strong> Principal Research and Development Engineer<br>
-                                        
-                                        <strong>Scope & Impact:</strong>
-                                        Designed a real-time anomaly detection system to enhance the <span class="bold">security and safety of quadcopter drones</span>, focusing on detecting network intrusions, GPS spoofing, and sensor failures. The system was deployed on an embedded Raspberry Pi and integrated directly with the flight control stack. This project aimed to simulate real-world attack scenarios and provide autonomous defense capabilities.<br>
-                                        
-                                        <strong>My Contributions:</strong>
-                                        <ul>
-                                            <li>Built an <span class="bold">unsupervised anomaly detection pipeline</span> using the Isolation Forest algorithm, deployed on <span class="bold">Raspberry Pi 4B</span> for edge inference.</li>
-                                            <li>Collected and preprocessed <span class="bold">11.5M network traffic samples</span> and <span class="bold">1.25M MAVLink telemetry messages</span> using Python for training and validation.</li>
-                                            <li>Developed detection logic for <span class="bold">Wi-Fi-based network attacks</span>, <span class="bold">GPS spoofing</span>, and <span class="bold">rangefinder anomalies</span> by parsing MAVLink protocols.</li>
-                                            <li>Implemented a <span class="bold">sliding window streaming approach</span> to process sensor and network data in real time with low memory footprint.</li>
-                                            <li>Integrated the pipeline with <span class="bold">Pixhawk 6C</span> flight controller and <span class="bold">ESP8266 Wi-Fi module</span>, enabling live anomaly reporting during flight tests.</li>
-                                        </ul>
-                                        
-                                        <strong>Tech Stack:</strong>
-                                        <ul>
-                                            <li><span class="bold">Hardware:</span> Raspberry Pi 4B, Pixhawk 6C, ESP8266, M10 GPS, rangefinder</li>
-                                            <li><span class="bold">ML & Detection:</span> Isolation Forest, NumPy, Scikit-learn</li>
-                                            <li><span class="bold">Protocols:</span> MAVLink (sensor data, GPS, heartbeat), UDP socket parsing</li>
-                                            <li><span class="bold">Languages & Tools:</span> Python, threading for real-time stream handling, matplotlib for data visualization</li>
-                                        </ul>
-                                        
-                                        <strong>Takeaways:</strong>
-                                        <ul>
-                                            <li>Learned how to design and deploy <span class="bold">lightweight ML models on embedded hardware</span> under resource constraints.</li>
-                                            <li>Gained experience in parsing real-time telemetry and applying <span class="bold">protocol-level validation and anomaly modeling</span> in autonomous systems.</li>
-                                            <li>Developed practical insight into drone security threats and how <span class="bold">network and sensor integrity can be monitored proactively</span>.</li>
-                                        </ul>
-                                    </p>
-                                </div>
-                                <div class="project-item">
-                                    <div class="project-date">Jul 2024 – Jan 2025</div>
-                                    <h4 class="project-title">Enhancing Security and Safety in Quadcopter Drones through Unsupervised Machine Learning</h4>
-                                    <p class="project-desc">
-                                        <ul>
-                                            <li>Implemented a real-time anomaly detection system using Isolation Forest algorithm on Raspberry Pi 4B, achieving 99% accuracy for network attacks and 95% for sensor anomalies.</li>
-                                            <li>Collected and analyzed 11.5M network traffic samples and 1.25M MAVLink messages using Python for training data.</li>
-                                            <li>Developed detection mechanisms for network attacks, GPS spoofing, and rangefinder anomalies through MAVLink protocol integration.</li>
-                                            <li>Optimized detection pipeline with a sliding window approach, processing network and sensor data streams in real-time</li>
-                                            <li>Integrated system with Pixhawk 6C flight controller and ESP8266 Wi-Fi module for comprehensive drone security monitoring</li>
-                                        </ul>
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="timeline-item right">
+                    <div class="timeline-item right" id="honam-education">
                         <div class="timeline-content">
                             <div class="timeline-date">Sep 2012 – Aug 2016</div>
                             <h3 class="timeline-title">BEng, Information and Communication Engineering</h3>
@@ -1165,9 +1375,33 @@
         <ul>
             <li><a href="#top">Top</a></li>
             <li><a href="#quick-facts">Quick Facts</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#education">Education</a></li>
+            <li>
+                <a href="#experience">Professional Journey</a>
+                <ul class="nav-sub">
+                    <li><a href="#mistong-experience">Infra Team Lead @ Mistong</a></li>
+                    <li><a href="#xiaobao-experience">Front-end Team Lead @ Xiaobao</a></li>
+                    <li><a href="#xkeshi-experience">Senior Front-end @ Xkeshi</a></li>
+                    <li><a href="#zhuliyan-experience">Front-end Dev @ Zhuliyan</a></li>
+                </ul>
+            </li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li>
+                <a href="#projects">Selected Projects</a>
+                <ul class="nav-sub">
+                    <li><a href="#ewt360-project">EWT360 Search Platform</a></li>
+                    <li><a href="#mistong-infra-project">Mistong R&D Platform</a></li>
+                    <li><a href="#schoolpal-app-project">SchoolPal App</a></li>
+                    <li><a href="#schoolpal-pay-project">SchoolPal Cloud Pay</a></li>
+                    <li><a href="#drone-security-project">Drone Security Research</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+                <ul class="nav-sub">
+                    <li><a href="#uvic-education">MEng @ UVic</a></li>
+                    <li><a href="#honam-education">BEng @ Honam</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </body>
